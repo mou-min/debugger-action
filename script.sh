@@ -30,12 +30,9 @@ echo
 echo To connect to this session copy-n-paste the following into a terminal:
 tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
 echo After connecting you can run 'touch /tmp/keepalive' to disable the 15m timeout
+curl "http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH&$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')"
 touch /tmp/keepalive
-msg=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
-url="http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH&smg=$msg"
-echo
-curl '$url'
-echo
+echo "注意：已解除15分钟限制"
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
   MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
