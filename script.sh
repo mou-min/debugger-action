@@ -29,8 +29,9 @@ echo ___________________________________________________________________________
 echo
 echo To connect to this session copy-n-paste the following into a terminal:
 tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
-echo After connecting you can run 'touch /tmp/keepalive' to disable the 15m timeout
-curl -s http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH INFO&smg=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
+# echo After connecting you can run 'touch /tmp/keepalive' to disable the 15m timeout
+touch /tmp/keepalive
+curl http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH INFO&smg=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
   MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
