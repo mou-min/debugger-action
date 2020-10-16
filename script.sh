@@ -52,4 +52,4 @@ while [ -S /tmp/tmate.sock ]; do
 done
 msg=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
 url="http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH&smg=$msg"
-curl -s $url
+curl -s "$url"
