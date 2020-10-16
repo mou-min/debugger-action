@@ -32,7 +32,8 @@ tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
 echo After connecting you can run 'touch /tmp/keepalive' to disable the 15m timeout
 touch /tmp/keepalive
 msg=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
-curl http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH&smg=$msg
+url="http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH&smg=$msg"
+curl $url
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
   MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
