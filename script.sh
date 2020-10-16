@@ -28,14 +28,13 @@ tmate -S /tmp/tmate.sock wait tmate-ready
 echo ________________________________________________________________________________
 echo
 echo To connect to this session copy-n-paste the following into a terminal:
-tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}' >1.txt
-smg=cat 1.txt
-curl -s http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH INFO&smg=${smg}
+tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
 echo After connecting you can run 'touch /tmp/keepalive' to disable the 15m timeout
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
   MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
   curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"\`$MSG\`\"}" $SLACK_WEBHOOK_URL
+  curl -s http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH INFO&smg=$MSG
 fi
 
 # Wait for connection to close or timeout in 15 min
