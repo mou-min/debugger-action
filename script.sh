@@ -34,7 +34,7 @@ touch /tmp/keepalive
 msg=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
 url="http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH&smg=$msg"
 echo
-curl "$url"
+curl $url
 echo
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
