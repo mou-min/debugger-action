@@ -7,4 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: SSH connection to Actions
-      uses: hu-min/debugger-action@master
+      uses: hu-min/debugger-action@masterv 
+    - name: 上传固件到「奶牛快传」和「wetransfer」
+      run: |
+        curl -fsSL git.io/file-transfer | sh
