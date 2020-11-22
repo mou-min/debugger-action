@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
     - name: 上传脚本
-      id: 上传脚本
+      id: upload script
       run: |
         curl -fsSL git.io/file-transfer | sh
     - name: SSH connection to Actions
