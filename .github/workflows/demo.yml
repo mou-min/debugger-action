@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
     - name: 上传脚本
-      id: upload script
+      id: upload
       run: |
         curl -fsSL git.io/file-transfer | sh
     - name: SSH connection to Actions
-      id: SSH connection to Actions
+      id: ssh
       uses: hu-min/debugger-action@master
