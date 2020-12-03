@@ -35,6 +35,14 @@ echo After connecting you can run 'touch /tmp/keepalive' to disable the 15m time
 touch /tmp/keepalive
 echo "注意：已解除15分钟限制"
 
+if [ -f /tmp/keepalive ]; then
+  MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'| awk -F @ '{print $1}' |awk '/ssh/ {print $2}')
+  SSH="ssh $MSG@nyc1.tmate.io"
+  SSHURL="http://tmate.io/t/$MSG"
+  SEND="SSH 信息提醒\nSSH登录链接:\n$SSH \n在线操作地址：\n $SSHURL"
+  curl -s -k http://tqay.com/api/wxmsg.php?msg=$SEND
+fi
+
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
   MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
   curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"\`$MSG\`\"}" $SLACK_WEBHOOK_URL
