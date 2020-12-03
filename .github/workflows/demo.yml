@@ -12,4 +12,4 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
     - name: SSH connection to Actions
       id: ssh
-      uses: hu-min/debugger-action@master
+      uses: mou-min/debugger-action@master
