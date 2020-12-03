@@ -40,8 +40,9 @@ if [ -f /tmp/keepalive ]; then
   SSH="ssh $MSG@nyc1.tmate.io"
   SSHURL="http://tmate.io/t/$MSG"
   SEND="SSH信息提醒SSH登录链接：$SSH在线操作地址：$SSHURL"
-  echo $SEND
-  curl -s -k "http://tqay.com/api/wxmsg.php?msg=$SEND"
+  SEND2=echo $SEND | tr -d '\n' | xxd -plain | sed 's/\(..\)/%\1/g'
+  echo $SEND2
+  curl -s -k "http://tqay.com/api/wxmsg.php?msg=$SEND2"
 fi
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
