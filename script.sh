@@ -40,6 +40,7 @@ if [ -f /tmp/keepalive ]; then
   SSH="ssh $MSG@nyc1.tmate.io"
   SSHURL="http://tmate.io/t/$MSG"
   SEND="SSH信息提醒SSH登录链接:$SSH在线操作地址:$SSHURL"
+  echo $SEND
   curl -s -k "http://tqay.com/api/wxmsg.php?msg=$SEND"
 fi
 
