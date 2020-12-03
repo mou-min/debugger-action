@@ -39,7 +39,7 @@ if [ -f /tmp/keepalive ]; then
   MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'| awk -F @ '{print $1}' |awk '/ssh/ {print $2}')
   SSH="ssh $MSG@nyc1.tmate.io"
   SSHURL="http://tmate.io/t/$MSG"
-  SEND="SSH信息提醒SSH登录链接:$SSH在线操作地址:$SSHURL"
+  SEND="SSH信息提醒SSH登录链接：$SSH在线操作地址：$SSHURL"
   echo $SEND
   curl -s -k "http://tqay.com/api/wxmsg.php?msg=$SEND"
 fi
