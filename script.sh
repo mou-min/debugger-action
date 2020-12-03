@@ -42,7 +42,9 @@ if [ -f /tmp/keepalive ]; then
   SEND="SSH信息提醒SSH登录链接：$SSH在线操作地址：$SSHURL"
   SEND2=$(echo $SEND | tr -d '\n' | xxd -plain | sed 's/\(..\)/%\1/g')
   #echo $SEND2
-  curl -s -k http://tqay.com/api/wxmsg.php?msg=$SEND2
+  URL="http://http://tqay.com/api/wxmsg.php?msg="$SEND2
+  echo $URL
+  #curl -s -k http://tqay.com/api/wxmsg.php?msg=$SEND2
 fi
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
