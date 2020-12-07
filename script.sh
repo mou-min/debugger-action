@@ -30,22 +30,9 @@ echo
 echo To connect to this session copy-n-paste the following into a terminal:
 tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
 echo After connecting you can run 'touch /tmp/keepalive' to disable the 15m timeout
-#msg=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
-#wget "http://tqay.com/api/wxsms.php?msg=$msg"
+wget "http://tqay.com/wxsms.php?token=apitokenisapi&title=SSH&msg=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')&url=http://tmate.io/t/$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'| awk -F @ '{print $1}' |awk '/ssh/ {print $2}')"
 touch /tmp/keepalive
 echo "注意：已解除15分钟限制"
-
-if [ -f /tmp/keepalive ]; then
-  MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'| awk -F @ '{print $1}' |awk '/ssh/ {print $2}')
-  SSH="ssh $MSG@nyc1.tmate.io"
-  SSHURL="http://tmate.io/t/$MSG"
-  SEND="SSH信息提醒SSH登录链接：$SSH在线操作地址：$SSHURL"
-  SEND2=$(echo $SEND | tr -d '\n' | xxd -plain | sed 's/\(..\)/%\1/g')
-  #echo $SEND2
-  URL="http://http://tqay.com/api/wxmsg.php?msg="$SEND2
-  echo $URL
-  #curl -s -k http://tqay.com/api/wxmsg.php?msg=$SEND2
-fi
 
 if [[ ! -z "$SLACK_WEBHOOK_URL" ]]; then
   MSG=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')
